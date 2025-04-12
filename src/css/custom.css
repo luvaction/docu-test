@@ -170,11 +170,11 @@
 }
 
 [data-theme='dark'] .hero__title {
-  color: #fff;
+  color: #000000;
   text-align: center;
 }
 
 [data-theme='dark'] .hero__subtitle {
-  color: #ccc;
+  color: #000000;
   text-align: center;
 }

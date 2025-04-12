@@ -16,10 +16,8 @@ NetFUNNEL iOS/Android/Web 에이전트는 서비스 접속 트래픽을 제어�
 
 ## 시작 전에 준비할 것
 
-- 프로젝트에 맞는 NetFUNNEL 에이전트 설치 파일 (`.framework`, `.aar`, `.js`)
 - NetFUNNEL 콘솔 접속 권한
 - 발급받은 프로젝트 키 / 세그먼트 키
-- SDK 통합 가이드 문서
 
 ## 기본 통합 흐름
 

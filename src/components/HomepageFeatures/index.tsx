@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
+import React from 'react';
 
 type FeatureItem = {
   title: string;
@@ -12,7 +13,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: '실시간 트래픽 제어',
-    image: require('@site/static/img/main/main_1.png').default, // PNG file
+    image: require('@site/static/img/main/main_j1.png').default,
     description: (
       <>
         NetFUNNEL은 트래픽 폭주 상황에서 실시간으로 진입 제어를 수행하여 시스템을 안정적으로 보호합니다.
@@ -21,7 +22,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: '간편한 연동',
-    image: require('@site/static/img/main/main_2.png').default, // PNG file
+    image: require('@site/static/img/main/main_j2.png').default,
     description: (
       <>
         간단한 초기화 함수 호출만으로 다양한 플랫폼에서 에이전트를 연동할 수 있습니다.
@@ -30,7 +31,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: '강력한 커스터마이징',
-    image: require('@site/static/img/main/main_3.png').default, // PNG file
+    image: require('@site/static/img/main/main_j3.png').default,
     description: (
       <>
         템플릿 사용 또는 직접 구현을 통해 대기 화면, 메시지, 스타일을 자유롭게 커스터마이징할 수 있습니다.
