@@ -97,6 +97,7 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} STCLab. Built with Docusaurus.`,
     },
     prism: {
+      additionalLanguages: ['groovy', 'kotlin'],
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },

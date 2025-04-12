@@ -1,0 +1,23 @@
+## 1. 에이전트 초기화
+
+NetFUNNEL JavaScript 에이전트는 앱 실행과 동시에 초기화되어야 합니다.
+
+에이전트 설치 코드를 복사하여 HTML 파일의 `<head>` 태그에 넣습니다. 
+
+:::warning
+HTML이 여러 개일 경우 넷퍼넬을 적용할 모든 HTML에 넣어야 합니다. 
+:::
+
+```HTML
+<script
+    src="https://agent-lib.stclab.com/agents/client/javascript/netfunnel-javascript-agent.js"
+    data-nf-server-url="https://{{clientId}}.netfunnel.stclab.com"
+    data-nf-setting-url="https://nf-setting-bucket.stclab.com/{{clientId}}.netfunnel/nf-setting.json"
+    data-nf-vwr-page-url="https://agent-lib.stclab.com/vwr-page/{{clientId}}.netfunnel/index.html"
+    data-nf-retry-count="0"
+    data-nf-network-timeout="3000"
+    data-nf-print-log="false"
+    data-nf-use-credential="false"
+    data-nf-error-bypass="false"
+></script>
+```

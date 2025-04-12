@@ -1,0 +1,298 @@
+## 1. 최소 요구 사항
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+:::warning
+아래의 요구 사항은 변동이 어렵습니다.
+:::
+ 
+- Android API Level 22 (Lollipop 5.1) 이상
+- Java 1.8 이상
+- Kotlin 1.9.0 이상
+
+---
+
+## 2. 에이전트 설치
+
+:::info
+본 가이드는 Android Studio 환경을 기준으로 작성합니다.
+:::
+
+NetFUNNEL Android 에이전트는 `.aar(Android Archive)` 형식으로 제공됩니다. Android 프로젝트에 `.aar` 파일을 추가하고, Gradle 설정을 통해 종속성을 등록합니다.
+
+### 2.1 에이전트 다운로드
+
+NetFUNNEL `콘솔의 에이전트 탭`에서 NetFUNNEL Android 에이전트를 다운로드합니다.
+
+![설명](/img/android-agent/install/android_install_1.png)
+
+2.2 `.aar` 파일 추가
+
+제공된 `.aar`파일을 프로젝트의 `app/libs` 디렉터리에 복사합니다.
+
+```tree
+프로젝트 루트/
+├── app/
+|    └── libs/
+|         └── netfunnel-android-agent-release-{{latest}}.aar
+|         └── netfunnel-android-agent-debug-{{latest}}.aar
+└── gradle/
+```
+
+![설명](/img/android-agent/install/android_install_2.png)
+
+### 2.3 Gradle 설정
+
+#### 2.3.1 에이전트 종속성 추가
+
+.aar 파일을 인식시키기 위해 아래와 같이 `build.gradle` 파일에 종속성을 추가합니다.
+
+<Tabs>
+  <TabItem value="Kotlin DSL (build.gradle.kts)" label="Kotlin DSL (build.gradle.kts)">
+    ```kotlin
+    import Netfunnel_iOS
+
+    val agent = Netfunnel.shared
+    agent.nfStart(projectKey = "{{projectKey}}", segmentKey = "{{segmentKey}}")
+    ```
+  </TabItem>
+  <TabItem value="Groovy DSL (build.gradle)" label="Groovy DSL (build.gradle)">
+    ```groovy
+    apply plugin: 'netfunnel'
+
+    netfunnel {
+      projectKey = "{{projectKey}}"
+      segmentKey = "{{segmentKey}}"
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+:::info
+NetFUNNEL Android 에이전트는 빌드 환경에 따라 총 2개의 파일을 제공합니다.
+디버깅 시에는 debug 사용을 권장하며, 앱 배포 시 release 사용을 권장합니다.
+:::
+
+#### 2.3.2 외부 라이브러리 추가
+
+NetFUNNEL Android 에이전트는 외부 라이브러리를 포함하지 않습니다. 아래 라이브러리를 프로젝트에 추가합니다.
+
+- [**Ktor**](https://ktor.io/docs/releases.html#release-details): 네트워크 통신 라이브러리 (2.1.0 이상 3.0.0 미만)
+- [**Kotlinx Serialization**](https://kotlinlang.org/docs/serialization.html): 직렬화 라이브러리 (버전 무관)
+
+<Tabs>
+  <TabItem value="Kotlin DSL (build.gradle.kts)" label="Kotlin DSL (build.gradle.kts)">
+    ```kotlin
+dependencies {
+    ...
+    
+    val ktorVersion = "{{KTOR_VERSION}}"
+    val serializationVersion = "{{SERIALIZATION_VERSION}}"
+    
+    // Ktor dependencies
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-gson:$ktorVersion")
+    
+    // Serialization dependency
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+}
+    ```
+  </TabItem>
+  <TabItem value="Groovy DSL (build.gradle)" label="Groovy DSL (build.gradle)">
+    ```groovy
+ext {
+    ktorVersion = "{{KTOR_VERSION}}"
+    serializationVersion = "{{SERIALIZATION_VERSION}}"
+}
+
+dependencies {
+    ...
+    
+    // Ktor dependencies
+    implementation "io.ktor:ktor-client-core:$ktorVersion"
+    implementation "io.ktor:ktor-client-okhttp:$ktorVersion"
+    implementation "io.ktor:ktor-client-content-negotiation:$ktorVersion"
+    implementation "io.ktor:ktor-serialization-gson:$ktorVersion"
+    
+    // Serialization dependency
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion"
+}
+    ```
+  </TabItem>
+</Tabs>
+
+#### 2.3.3 Gradle 환경 설정
+
+아래는 에이전트가 동작하기 위한 build.gradle 환경 예시입니다.
+
+<Tabs>
+  <TabItem value="Kotlin DSL (build.gradle.kts)" label="Kotlin DSL (build.gradle.kts)">
+    ```kotlin
+dependencies {
+    ...
+    
+    val ktorVersion = "{{KTOR_VERSION}}"
+    val serializationVersion = "{{SERIALIZATION_VERSION}}"
+    
+    // Ktor dependencies
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-gson:$ktorVersion")
+    
+    // Serialization dependency
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+}
+    ```
+  </TabItem>
+  <TabItem value="Groovy DSL (build.gradle)" label="Groovy DSL (build.gradle)">
+    ```groovy
+ext {
+    ktorVersion = "{{KTOR_VERSION}}"
+    serializationVersion = "{{SERIALIZATION_VERSION}}"
+}
+
+dependencies {
+    ...
+    
+    // Ktor dependencies
+    implementation "io.ktor:ktor-client-core:$ktorVersion"
+    implementation "io.ktor:ktor-client-okhttp:$ktorVersion"
+    implementation "io.ktor:ktor-client-content-negotiation:$ktorVersion"
+    implementation "io.ktor:ktor-serialization-gson:$ktorVersion"
+    
+    // Serialization dependency
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion"
+}
+    ```
+  </TabItem>
+</Tabs>
+
+![설명](/img/android-agent/install/android_install_3.png)
+
+### 2.4 Manifest 설정
+
+NetFUNNEL 서버와 통신하기 위해 인터넷 사용 권한을 추가해야 합니다. `AndroidManifest.xml` 파일에서 인터넷 접속 권한을 허용합니다.
+
+<Tabs>
+  <TabItem value="AndroidManifest.xml" label="AndroidManifest.xml">
+    ```xml
+android {
+    compileSdk 34
+    
+    defaultConfig {
+        minSdk 22
+        targetSdk 34
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    
+    buildFeatures {
+        viewBinding = true
+    }
+}
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+## 3. 에이전트 초기화
+
+NetFUNNEL Android 에이전트는 앱 실행과 동시에 초기화되어야 합니다.
+
+:::info
+`Application` 클래스의 `onCreate()`에서 초기화 작업을 수행합니다.
+:::
+
+### 3.1 초기화 함수 호출
+
+초기화 함수는 에이전트가 동작하는 데 필요한 설정 값을 받아 내부 구성 요소를 준비합니다.
+
+
+<Tabs>
+  <TabItem value="Kotlin" label="Kotlin">
+    ```kotlin
+import com.nf4.Netfunnel
+
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        Netfunnel.initialize(
+            serverUrl = "{{SERVER_URL}}",
+            errorUrl = "{{ERROR_URL}}",
+            networkTimeout = 3000,
+            retryCount = 0,
+            printLog = false,
+            errorBypass = false,
+            useNetfunnelTemplate = true,
+            userId = "{{USER_ID}}"
+        )
+    }
+}
+    ```
+  </TabItem>
+  <TabItem value="Java" label="Java">
+    ```Java
+import com.nf4.Netfunnel;
+
+public class SampleApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        Netfunnel.INSTANCE.initialize(
+                "{{SERVER_URL}}",
+                "{{ERROR_URL}}",
+                3000,
+                0,
+                false,
+                false,
+                true,
+                "{{USER_ID}}"
+        );
+    }
+}
+    ```
+  </TabItem>
+</Tabs>
+
+:::info
+초기화 함수에 사용하는 `SERVER_URL`, `ERROR_URL은` **콘솔의 에이전트 탭**에서 확인합니다.
+:::
+
+### 3.2 Manifest 수정
+
+생성한 `Application` 클래스는 `AndroidManifest.xml`에 name을 등록합니다.
+
+<Tabs>
+  <TabItem value="AndroidManifest.xml" label="AndroidManifest.xml">
+    ```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- Application name 등록 -->
+    <application
+        android:name=".SampleApplication"
+        android:allowBackup="true">
+        
+    </application>
+        
+</manifest>
+    ```
+  </TabItem>
+</Tabs>
