@@ -4,16 +4,12 @@ import type { Options as ClassicPresetOptions, ThemeConfig as ClassicThemeConfig
 
 const config: Config = {
   title: 'NetFUNNEL',
-  tagline: 'Developers',
-  favicon: 'img/logo_STCLab.png',
+  tagline: 'Traffic Control Agent Guide',
+  favicon: 'img/logo_STCLab.png', // ← 로고명도 통일
 
-  // ✅ 1. GitHub Pages 도메인
   url: 'https://luvaction.github.io',
-
-  // ✅ 2. 배포될 repo 이름과 일치
   baseUrl: '/docu-test/',
 
-  // ✅ 3. GitHub 정보
   organizationName: 'luvaction',
   projectName: 'docu-test',
 
@@ -21,8 +17,8 @@ const config: Config = {
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'ko',
+    locales: ['ko'],
   },
 
   presets: [
@@ -31,16 +27,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // editUrl: 'https://github.com/luvaction/docu-test/tree/main/',
+          // editUrl: 'https://github.com/luvaction/docu-test/edit/main/',
         },
-        // blog: {
-        //   showReadingTime: true,
-        //   editUrl: 'https://github.com/luvaction/docu-test/tree/main/',
-        //   feedOptions: {
-        //     type: ['rss', 'atom'],
-        //     xslt: true,
-        //   },
-        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -49,7 +37,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/netfunnel_card.png', // ← SNS 공유용 이미지
     navbar: {
       title: 'NetFUNNEL Developer',
       logo: {
@@ -61,40 +49,38 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Guide',
+          label: 'Agent 가이드',
         },
-        // {to: '/blog', label: 'Blog', position: 'left'},
-        // {
-        //   href: 'https://github.com/luvaction/docu-test',
-        //   label: 'GitHub',
-        //   position: 'right',
-        // },
+        // 커스텀: 깃허브 링크 제거 or 아래에 노출할 수 있음
       ],
     },
     footer: {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
-          items: [{label: 'Guide', to: '/docs/intro'}],
-        },
-        {
-          title: 'Community',
+          title: 'NetFUNNEL',
           items: [
-            {label: 'Stack Overflow', href: 'https://stackoverflow.com/questions/tagged/docusaurus'},
-            {label: 'Discord', href: 'https://discordapp.com/invite/docusaurus'},
-            {label: 'X', href: 'https://x.com/docusaurus'},
+            {
+              label: 'Guide',
+              to: '/docs/intro',
+            },
+            {
+              label: 'STCLab 홈페이지',
+              href: 'https://www.stclab.com',
+            },
           ],
         },
         {
-          title: 'More',
+          title: '연락처',
           items: [
-            {label: 'Blog', to: '/blog'},
-            {label: 'GitHub', href: 'https://github.com/luvaction/docu-test'},
+            {
+              label: '기술지원 문의',
+              href: 'mailto:support@stclab.com',
+            },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} STCLab. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} STCLab Inc. All rights reserved.`,
     },
     prism: {
       additionalLanguages: ['groovy', 'kotlin'],

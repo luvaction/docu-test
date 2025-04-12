@@ -1,4 +1,4 @@
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -11,38 +11,35 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: '실시간 트래픽 제어',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        NetFUNNEL은 트래픽 폭주 상황에서 실시간으로 진입 제어를 수행하여 시스템을 안정적으로 보호합니다.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: '간편한 연동',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        간단한 초기화 함수 호출만으로 다양한 플랫폼(iOS, Android, Web)에서 에이전트를 연동할 수 있습니다.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: '강력한 커스터마이징',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        템플릿 사용 또는 직접 구현을 통해 대기 화면, 메시지, 스타일을 자유롭게 커스터마이징할 수 있습니다.
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
