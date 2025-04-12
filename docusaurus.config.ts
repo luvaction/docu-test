@@ -4,7 +4,7 @@ import type { Options as ClassicPresetOptions, ThemeConfig as ClassicThemeConfig
 
 const config: Config = {
   title: 'NetFUNNEL',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Developers',
   favicon: 'img/logo_STCLab.png',
 
   // ✅ 1. GitHub Pages 도메인
@@ -33,16 +33,16 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // editUrl: 'https://github.com/luvaction/docu-test/tree/main/',
         },
-        blog: {
-          showReadingTime: true,
-          // editUrl: 'https://github.com/luvaction/docu-test/tree/main/',
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-        },
+        // blog: {
+        //   showReadingTime: true,
+        //   editUrl: 'https://github.com/luvaction/docu-test/tree/main/',
+        //   feedOptions: {
+        //     type: ['rss', 'atom'],
+        //     xslt: true,
+        //   },
+        // },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: require.resolve('./src/css/custom.css'),
         },
       } satisfies ClassicPresetOptions,
     ],
@@ -61,14 +61,14 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Guide',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://github.com/luvaction/docu-test',
-          label: 'GitHub',
-          position: 'right',
-        },
+        // {to: '/blog', label: 'Blog', position: 'left'},
+        // {
+        //   href: 'https://github.com/luvaction/docu-test',
+        //   label: 'GitHub',
+        //   position: 'right',
+        // },
       ],
     },
     footer: {
@@ -76,7 +76,7 @@ const config: Config = {
       links: [
         {
           title: 'Docs',
-          items: [{label: 'Tutorial', to: '/docs/intro'}],
+          items: [{label: 'Guide', to: '/docs/intro'}],
         },
         {
           title: 'Community',

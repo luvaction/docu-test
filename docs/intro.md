@@ -2,46 +2,29 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# NetFUNNEL 시작하기
 
-Let's discover **Docusaurus in less than 5 minutes**.
+NetFUNNEL iOS/Android/Web 에이전트는 서비스 접속 트래픽을 제어하여 안정적인 사용자 경험을 보장하는 **트래픽 제어 솔루션**입니다.  
+이 페이지는 NetFUNNEL 에이전트를 프로젝트에 통합하고 초기화하는 과정을 간단히 소개합니다.
 
-## Getting Started
+## 주요 기능
 
-Get started by **creating a new site**.
+- 대기실(Waiting Room)을 통한 사용자 흐름 제어
+- 커스터마이징 가능한 대기 화면 제공
+- 서버 부하 분산 및 트래픽 피크 타임 대응
+- iOS / Android / Web 다양한 플랫폼 지원
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## 시작 전에 준비할 것
 
-### What you'll need
+- 프로젝트에 맞는 NetFUNNEL 에이전트 설치 파일 (`.framework`, `.aar`, `.js`)
+- NetFUNNEL 콘솔 접속 권한
+- 발급받은 프로젝트 키 / 세그먼트 키
+- SDK 통합 가이드 문서
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## 기본 통합 흐름
 
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+1. NetFUNNEL 콘솔에서 프로젝트 키와 세그먼트 키를 발급받습니다.
+2. SDK를 프로젝트에 포함시킵니다.
+3. 초기화 함수에서 키와 URL을 설정합니다.
+4. 진입 시점에 `nfStart()` 또는 `nfStartSection()`을 호출합니다.
+5. 콜백으로부터 대기 또는 성공 상태를 받아 처리합니다.

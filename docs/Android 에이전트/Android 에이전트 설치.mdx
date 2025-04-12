@@ -51,19 +51,19 @@ NetFUNNEL `콘솔의 에이전트 탭`에서 NetFUNNEL Android 에이전트를 �
 <Tabs>
   <TabItem value="Kotlin DSL (build.gradle.kts)" label="Kotlin DSL (build.gradle.kts)">
     ```kotlin
-    import Netfunnel_iOS
-
-    val agent = Netfunnel.shared
-    agent.nfStart(projectKey = "{{projectKey}}", segmentKey = "{{segmentKey}}")
+    dependencies {
+        ...
+        
+        implementation(files("libs/netfunnel-android-agent-release-{{latest}}.aar"))
+    }
     ```
   </TabItem>
   <TabItem value="Groovy DSL (build.gradle)" label="Groovy DSL (build.gradle)">
     ```groovy
-    apply plugin: 'netfunnel'
-
-    netfunnel {
-      projectKey = "{{projectKey}}"
-      segmentKey = "{{segmentKey}}"
+    dependencies {
+        ...
+        
+        implementation files("libs/netfunnel-android-agent-release-{{latest}}.aar")
     }
     ```
   </TabItem>

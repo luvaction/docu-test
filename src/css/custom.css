@@ -122,3 +122,48 @@
   font-weight: 500;
   line-height: 1.4;
 }
+
+/* 기본 라이트 모드용 navbar */
+.navbar {
+  background-color: #FCFCFD !important;
+  color: #000 !important;
+}
+
+.navbar__inner,
+.navbar__title,
+.navbar__brand {
+  color: #000 !important;
+}
+
+/* 다크모드용 navbar */
+[data-theme='dark'] .navbar {
+  background-color: #1a1a1a !important;
+}
+
+[data-theme='dark'] .navbar__inner,
+[data-theme='dark'] .navbar__title,
+[data-theme='dark'] .navbar__brand {
+  color: #fff !important;
+}
+
+.hero__title {
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.hero__subtitle {
+  color: #333;
+  text-align: center;
+  margin: 0 auto;
+}
+
+[data-theme='dark'] .hero__title {
+  color: #fff;
+  text-align: center;
+}
+
+[data-theme='dark'] .hero__subtitle {
+  color: #ccc;
+  text-align: center;
+}
