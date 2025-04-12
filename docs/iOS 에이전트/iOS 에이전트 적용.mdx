@@ -1,0 +1,117 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## 1. 에이전트 적용
+
+NetFUNNEL iOS 에이전트에서 제공하는 함수를 통해 특정 화면에 대기실을 적용할 수 있습니다.
+
+:::info
+
+넷퍼넬 함수에서 사용하는 projectKey, segmentKey는 **콘솔의 프로젝트 탭**에서 확인 가능합니다.
+
+![설명](/img/ios-agent/apply/ios_apply_1.png)
+
+:::
+
+:::info
+
+넷퍼넬 진입 제어 유형에는 기본 제어와 구간 제어가 있습니다.  
+제어 유형에 대한 설명은 <a href="#" style={{ color: "#2e81f7" }}><strong>넷퍼넬 콘솔 가이드</strong></a>에서 확인 가능합니다.
+
+:::
+
+## 2. 시작 함수
+
+대기실을 띄우기 위해 시작 함수를 호출합니다.
+
+<table>
+  <thead>
+    <tr>
+      <th>함수명</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>nfStart</code></td>
+      <td>
+        <strong>기본 제어 시작</strong><br />
+        이벤트 시작 시점에 호출합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>nfStartSection</code></td>
+      <td>
+        <strong>구간 제어 시작</strong><br />
+        이벤트 구간에 대한 시작 시점에 호출합니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Tabs>
+  <TabItem value="Swift" label="Swift">
+    ```swift
+import Netfunnel_iOS
+
+var agent = Netfunnel.shared
+agent.nfStart(projectKey: "{{projectKey}}", segmentKey: "{{segmentKey}}")
+    ```
+  </TabItem>
+  <TabItem value="Objective-C" label="Objective-C">
+    ```objectivec
+#import "Netfunnel_iOS/Netfunnel_iOS.h" // @import Netfunnel_iOS;
+
+Netfunnel *agent = [Netfunnel shared];
+[agent nfStartWithProjectKey: @"{{projectKey}}" segmentKey:@"{{segmentKey}}"];
+    ```
+  </TabItem>
+</Tabs>
+
+## 3. 종료 함수
+
+진입 키를 반납하여 다음 사용자가 진입할 수 있도록 종료 함수를 호출합니다.
+
+<table>
+  <thead>
+    <tr>
+      <th>함수명</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>nfStop</code></td>
+      <td>
+        <strong>기본 제어 종료</strong><br />
+        진입 성공 시 호출합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>nfStopSection</code></td>
+      <td>
+        <strong>구간 제어 종료</strong><br />
+        진입 성공 이후 구간 종료 시점에 호출합니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Tabs>
+  <TabItem value="Swift" label="Swift">
+    ```swift
+import Netfunnel_iOS
+
+var agent = Netfunnel.shared
+agent.nfStop(projectKey: "{{projectKey}}", segmentKey: "{{segmentKey}}")
+    ```
+  </TabItem>
+  <TabItem value="Objective-C" label="Objective-C">
+    ```objectivec
+#import "Netfunnel_iOS/Netfunnel_iOS.h" // @import Netfunnel_iOS;
+
+Netfunnel *agent = [Netfunnel shared];
+[agent nfStopWithProjectKey: @
+    ```
+  </TabItem>
+</Tabs>

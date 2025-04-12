@@ -1,7 +1,9 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 ## 1. 최소 요구 사항
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
 
 :::warning
 아래의 요구 사항은 변동이 어렵습니다.
@@ -243,11 +245,10 @@ nfContinue는 커스텀 대기창 사용 시에만 호출합니다. 자세한 �
 
 초기화 함수는 에이전트가 동작하는 데 필요한 설정 값을 받아 내부 구성 요소를 준비합니다.
 
-
 <Tabs>
-  <TabItem value="Swift" label="Swift">
-    ```swift
-import Netfunnel_iOS
+  <TabItem value="Swift" label="Swift" default>
+    <CodeBlock language="swift">
+{`import Netfunnel_iOS
 
 Netfunnel.shared.initialize(
     serverUrl: "{{SERVER_URL}}",
@@ -256,28 +257,31 @@ Netfunnel.shared.initialize(
     networkTimeout: 3000,
     retryCount: 0,
     printLog: true,
-    errorBypass: false
+    errorBypass: false,
     userId: "{{USER_ID}}"
-) 
-    ```
+)`}
+    </CodeBlock>
   </TabItem>
+
   <TabItem value="Objective-C" label="Objective-C">
-    ```objectivec
-#import "Netfunnel_iOS/Netfunnel_iOS.h" // @import Netfunnel_iOS;
+    <CodeBlock language="objectivec">
+{`#import "Netfunnel_iOS/Netfunnel_iOS.h"
 
 Netfunnel *agent = [Netfunnel shared];
 [agent initializeWithServerUrl:@"{{SERVER_URL}}"
                       errorUrl:@"{{ERROR_URL}}"
-                    delegate:self      // Set the delegate to a specified delegate object or 'self'.
-              networkTimeout:@3000
-                  retryCount:@0
-                    printLog:@false
-        useNetfunnelTemplate:@true
-                 errorBypass:@false
-                      userId:@"{{USER_ID}}"
-    ```
+                      delegate:self
+                networkTimeout:@3000
+                    retryCount:@0
+                      printLog:@false
+          useNetfunnelTemplate:@true
+                   errorBypass:@false
+                        userId:@"{{USER_ID}}"];`}
+    </CodeBlock>
   </TabItem>
 </Tabs>
+
+
 
 :::info
 초기화 함수에 사용하는 `SERVER_URL`, `ERROR_URL은` **콘솔의 에이전트 탭**에서 확인합니다. 
