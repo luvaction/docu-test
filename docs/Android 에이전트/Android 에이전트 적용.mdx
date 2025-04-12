@@ -1,0 +1,331 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## 1. 에이전트 적용
+
+NetFUNNEL Android 에이전트에서 제공하는 함수를 통해 특정 화면에 대기실을 적용할 수 있습니다. 
+
+:::info
+
+넷퍼넬 함수에서 사용하는 projectKey, segmentKey는 **콘솔의 프로젝트 탭**에서 확인 가능합니다.
+
+![설명](/img/ios-agent/apply/ios_apply_1.png)
+
+:::
+
+:::info
+
+넷퍼넬 진입 제어 유형에는 기본 제어와 구간 제어가 있습니다.  
+제어 유형에 대한 설명은 <a href="#" style={{ color: "#2e81f7" }}><strong>넷퍼넬 콘솔 가이드</strong></a>에서 확인 가능합니다.
+
+:::
+
+---
+
+## 2. 콜백 함수
+
+ NetFUNNEL Android 에이전트 사용을 위해 콜백 함수를 구현하고, 시작 함수와 종료 함수에 전달합니다.
+
+| 델리게이트       | 호출 조건                      | 설명                                           | 필수 구현 여부                           |
+|------------------|---------------------------|-----------------------------------------------|---------------------------------------|
+| `nfSuccess`      | 진입 성공                    | 진입 성공 후 실행될 로직 구현 (대기실 닫힘)            | O                                     |
+| `nfError`        | 넷퍼넬 서버 오류               | 넷퍼넬 서버 오류 발생 시 로직 (대기 중단 및 대기실 닫힘) | O                                      |
+| `nfNetworkError` | 네트워크 오류                 | 네트워크 오류 발생 시 로직 (대기 중단 및 대기실 닫힘)    | O                                     |
+| `nfBlock`        | 진입 차단                    | 차단실이 표시됐을 때 실행될 로직 구현                 | X                                     |
+| `nfClose`        | 종료 함수 호출 후              | 대기실 종료 후 실행할 로직                         | X                                     |
+| `nfComplete`     | 종료 함수 호출 후              | 종료 함수 호출 후 실행할 로직                       | X                                     |
+| `nfContinue`     | 넷퍼넬 템플릿 미사용 및 대기 중   | 커스텀 대기실 UI에 상태 업데이트 로직 구현             | X                                     |
+
+:::info
+`onContinue`는 커스텀 대기창 사용 시에만 호출합니다. 자세한 내용은 FAQ를 참고하세요.
+:::
+
+<Tabs>
+  <TabItem value="Kotlin - 익명 객체 구현 방식" label="Kotlin - 익명 객체 구현 방식">
+    ```kotlin
+import com.nf4.NetfunnelCallback
+
+class StartCallback {
+
+    companion object {
+        private const val TAG = "NetFUNNEL"
+    }
+
+    private val callback = object : NetfunnelCallback() {
+        override fun onSuccess(statusCode: Int, message: String) {
+            Log.d(TAG, "onSuccess $statusCode $message")
+        }
+
+        override fun onBlock(statusCode: Int, message: String) {
+            Log.d(TAG, "onBlock $statusCode $message")
+        }
+
+        override fun onClose(statusCode: Int, message: String) {
+            Log.d(TAG, "onClose $statusCode $message")
+        }
+
+        override fun onContinue(statusCode: Int, message: String, aheadWait: Int, behindWait: Int, waitTime: String, progressRate: Int) {
+            Log.d(TAG, "onContinue $statusCode $message")
+        }
+
+        override fun onError(statusCode: Int, message: String) {
+            Log.d(TAG, "onError $statusCode $message")
+        }
+
+        override fun onNetworkError(statusCode: Int, message: String) {
+            Log.d(TAG, "onNetworkError $statusCode $message")
+        }
+    }
+
+    fun getCallback(): NetfunnelCallback = callback
+}
+    ```
+  </TabItem>
+  <TabItem value="Java - 익명 객체 구현 방식" label="Java - 익명 객체 구현 방식">
+    ```java
+import com.nf4.NetfunnelCallback;
+
+public class StartCallback{
+
+    private static final String TAG = "NetFUNNEL";
+
+    private final NetfunnelCallback callback = new NetfunnelCallback() {
+        @Override
+        public void onSuccess(int statusCode, @NonNull String message) {
+            Log.d(TAG, "onSuccess " + statusCode + " " + message);
+        }
+
+        @Override
+        public void onBlock(int statusCode, @NonNull String message) {
+            Log.d(TAG, "onBlock " + statusCode + " " + message);
+        }
+
+        @Override
+        public void onClose(int statusCode, @NonNull String message) {
+            Log.d(TAG, "onClose " + statusCode + " " + message);
+        }
+
+        @Override
+        public void onContinue(int statusCode, @NonNull String message, int aheadWait, int behindWait, @NonNull String waitTime, int progressRate) {
+            Log.d(TAG, "onContinue " + statusCode + " " + message);
+        }
+
+        @Override
+        public void onError(int statusCode, @NonNull String message) {
+            Log.d(TAG, "onError " + statusCode + " " + message);
+        }
+
+        @Override
+        public void onNetworkError(int statusCode, @NonNull String message) {
+            Log.d(TAG, "onNetworkError " + statusCode + " " + message);
+        }
+    };
+
+    public NetfunnelCallback getCallback() {
+        return callback;
+    }
+}
+    ```
+  </TabItem>
+</Tabs>
+
+
+### 2.2 종료 콜백 - NetfunnelCompleteCallback
+
+종료 함수 호출 후, 다음 사용자 진입을 위한 키 반납이 완료되었음을 알립니다.
+
+<table>
+  <thead>
+    <tr>
+      <th>함수명</th>
+      <th>호출 조건</th>
+      <th>설명</th>
+      <th>필수 구현 여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>onComplete</code></td>
+      <td>종료 함수 호출 후</td>
+      <td>종료 함수 실행 후 실행될 로직 구현</td>
+      <td>X</td>
+    </tr>
+  </tbody>
+</table>
+
+<Tabs>
+  <TabItem value="Kotlin - 익명 객체 구현 방식" label="Kotlin - 익명 객체 구현 방식">
+    ```kotlin
+import com.nf4.NetfunnelCompleteCallback
+
+class StopCallback {
+
+    companion object {
+        private const val TAG = "NetFUNNEL"
+    }
+
+    private val callback = object : NetfunnelCompleteCallback() {
+        override fun onComplete(statusCode: Int, message: String) {
+            Log.d(TAG, "onComplete $statusCode $message")
+        }
+    }
+
+    fun getCallback(): NetfunnelCompleteCallback = callback
+}
+    ```
+  </TabItem>
+  <TabItem value="Java - 익명 객체 구현 방식" label="Java - 익명 객체 구현 방식">
+    ```java
+import com.nf4.NetfunnelCompleteCallback;
+
+public class StopCallback {
+
+    private static final String TAG = "NetFUNNEL";
+
+    private final NetfunnelCompleteCallback callback = new NetfunnelCompleteCallback() {
+        @Override
+        public void onComplete(int statusCode, @NonNull String message) {
+            Log.d(TAG, "onComplete " + statusCode + " " + message);
+        }
+    };
+
+    public NetfunnelCompleteCallback getCallback() {
+        return callback;
+    }
+}
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+## 3. 시작 함수
+
+대기실을 띄우기 위해 시작 함수를 호출합니다.
+
+<table>
+  <thead>
+    <tr>
+      <th>함수명</th>
+      <th>호출 조건</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>nfStart</code></td>
+      <td>기본 제어 시작</td>
+      <td>이벤트 시작 시점에 호출합니다.</td>
+    </tr>
+    <tr>
+      <td><code>nfStartSection</code></td>
+      <td>구간 제어 시작</td>
+      <td>이벤트 구간에 대한 시작 시점에 호출합니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<Tabs>
+  <TabItem value="Kotlin" label="Kotlin">
+    ```kotlin
+import com.nf4.Netfunnel
+
+class EventActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_event)
+
+        val callback = StopCallback()
+        Netfunnel.nfStop("{{projectKey}}", "{{segmentKey}}", callback.getCallback())
+    }
+}
+    ```
+  </TabItem>
+  <TabItem value="Java" label="Java">
+    ```java
+import com.nf4.NetfunnelCompleteCallback;
+
+public class StopCallback {
+
+    private static final String TAG = "NetFUNNEL";
+
+    private final NetfunnelCompleteCallback callback = new NetfunnelCompleteCallback() {
+        @Override
+        public void onComplete(int statusCode, @NonNull String message) {
+            Log.d(TAG, "onComplete " + statusCode + " " + message);
+        }
+    };
+
+    public NetfunnelCompleteCallback getCallback() {
+        return callback;
+    }
+}
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+## 4. 종료 함수
+
+진입 키를 반납하여 다음 사용자가 진입할 수 있도록 종료 함수를 호출합니다.
+
+<table>
+  <thead>
+    <tr>
+      <th>함수명</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>nfStop</code></td>
+      <td>
+        <strong>기본 제어 종료</strong><br />
+        진입 성공 시 호출합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>nfStopSection</code></td>
+      <td>
+        <strong>구간 제어 종료</strong><br />
+        진입 성공 이후 구간 종료 시점에 호출합니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Tabs>
+  <TabItem value="Kotlin" label="Kotlin">
+    ```kotlin
+import com.nf4.Netfunnel
+
+class EventActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_event)
+
+        val callback = StopCallback()
+        Netfunnel.nfStop("{{projectKey}}", "{{segmentKey}}", callback.getCallback())
+    }
+}
+    ```
+  </TabItem>
+  <TabItem value="Java" label="Java">
+    ```java
+import com.nf4.Netfunnel;
+
+public class EventActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_event);
+
+        StopCallback callback = new StopCallback();
+        Netfunnel.INSTANCE.nfStop("{{projectKey}}", "{{segmentKey}}", callback.getCallback());
+    }
+}
+    ```
+  </TabItem>
+</Tabs>
