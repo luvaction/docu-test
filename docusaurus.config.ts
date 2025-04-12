@@ -31,11 +31,11 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/luvaction/docu-test/tree/main/',
+          // editUrl: 'https://github.com/luvaction/docu-test/tree/main/',
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/luvaction/docu-test/tree/main/',
+          // editUrl: 'https://github.com/luvaction/docu-test/tree/main/',
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
