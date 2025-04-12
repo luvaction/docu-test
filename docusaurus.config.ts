@@ -4,7 +4,7 @@ import type { Options as ClassicPresetOptions, ThemeConfig as ClassicThemeConfig
 
 const config: Config = {
   title: 'NetFUNNEL',
-  tagline: 'Traffic Control Agent Guide',
+  tagline: 'Traffic, Control, Save',
   favicon: 'img/logo_STCLab.png', // ← 로고명도 통일
 
   url: 'https://luvaction.github.io',
@@ -49,7 +49,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Agent 가이드',
+          label: 'Guide',
         },
         // 커스텀: 깃허브 링크 제거 or 아래에 노출할 수 있음
       ],
