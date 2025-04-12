@@ -1,4 +1,7 @@
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## 1. 에이전트 제어 방식
 
 NetFUNNEL JavaScript 에이전트는 두 가지 방식으로 진입을 제어할 수 있습니다.
@@ -31,3 +34,91 @@ NetFUNNEL JavaScript 에이전트에서 제공하는 함수를 통해 특정 화
 제어 유형에 대한 설명은 <a href="#" style={{ color: "#2e81f7" }}><strong>넷퍼넬 콘솔 가이드</strong></a>에서 확인 가능합니다.
 
 :::
+
+---
+
+## 3. 시작 함수
+
+대기실을 띄우기 위해 시작 함수를 호출합니다.
+
+<table>
+  <thead>
+    <tr>
+      <th>함수명</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>nfStart</code></td>
+      <td>
+        <strong>기본 제어 시작</strong><br />
+        이벤트 시작 시점에 호출합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>nfStartSection</code></td>
+      <td>
+        <strong>구간 제어 시작</strong><br />
+        이벤트 구간에 대한 시작 시점에 호출합니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Tabs>
+  <TabItem value="JavaScript" label="JavaScript">
+    ```javascript
+nfStart({
+    projectKey: "{{projectKey}}",
+    segmentKey: "{{segmentKey}}"
+  }, function(response){
+  // TODO: Callback에 따라 로직을 구현합니다.
+});
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+## 3. 종료 함수
+
+진입 키를 반납하여 다음 사용자가 진입할 수 있도록 종료 함수를 호출합니다.
+
+<table>
+  <thead>
+    <tr>
+      <th>함수명</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>nfStop</code></td>
+      <td>
+        <strong>기본 제어 종료</strong><br />
+        진입 성공 시 호출합니다.
+      </td>
+    </tr>
+    <tr>
+      <td><code>nfStopSection</code></td>
+      <td>
+        <strong>구간 제어 종료</strong><br />
+        진입 성공 이후 구간 종료 시점에 호출합니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Tabs>
+  <TabItem value="JavaScript" label="JavaScript">
+    ```javascript
+nfStop({
+    projectKey: "{{projectKey}}",
+    segmentKey: "{{segmentKey}}"
+  }, function(response){
+  // TODO: Callback에 따라 로직을 구현합니다.
+});
+    ```
+  </TabItem>
+</Tabs>

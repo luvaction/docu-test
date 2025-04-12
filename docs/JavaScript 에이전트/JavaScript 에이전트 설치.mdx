@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## 1. 에이전트 초기화
 
 NetFUNNEL JavaScript 에이전트는 앱 실행과 동시에 초기화되어야 합니다.
@@ -8,7 +11,9 @@ NetFUNNEL JavaScript 에이전트는 앱 실행과 동시에 초기화되어야 
 HTML이 여러 개일 경우 넷퍼넬을 적용할 모든 HTML에 넣어야 합니다. 
 :::
 
-```HTML
+<Tabs>
+  <TabItem value="HTML" label="HTML">
+    ```HTML
 <script
     src="https://agent-lib.stclab.com/agents/client/javascript/netfunnel-javascript-agent.js"
     data-nf-server-url="https://{{clientId}}.netfunnel.stclab.com"
@@ -20,4 +25,6 @@ HTML이 여러 개일 경우 넷퍼넬을 적용할 모든 HTML에 넣어야 합
     data-nf-use-credential="false"
     data-nf-error-bypass="false"
 ></script>
-```
+    ```
+  </TabItem>
+</Tabs>
