@@ -53,10 +53,16 @@
 }
 
 
-/* 사이드바 전체 배경 */
+/* 라이트 모드 */
 .theme-doc-sidebar-container {
   background-color: #f5f6fa;
   border-right: 1px solid #ddd;
+}
+
+/* 다크모드용 사이드바 */
+[data-theme='dark'] .theme-doc-sidebar-container {
+  background-color: #1a1a1a;
+  border-right: 1px solid #444;
 }
 
 /* 각 링크 */
@@ -75,9 +81,14 @@
   font-weight: bold;
 }
 
-/* 호버 효과 */
-.menu__link:hover {
-  background-color: #f0f3ff;
+[data-theme='dark'] .menu__link {
+  color: #ccc;
+}
+
+[data-theme='dark'] .menu__link--active {
+  background-color: #2e81f720;
+  color: #5e9eff;
+  font-weight: bold;
 }
 
 /* ---- 제목 크기 조정 ---- */
