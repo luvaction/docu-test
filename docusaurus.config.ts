@@ -5,7 +5,7 @@ import type { Options as ClassicPresetOptions, ThemeConfig as ClassicThemeConfig
 const config: Config = {
   title: 'NetFUNNEL',
   tagline: 'Traffic, Control, Save',
-  favicon: 'img/logo_STCLab.png', // ← 로고명도 통일
+  favicon: 'img/logo_STCLab.png',
 
   url: 'https://luvaction.github.io',
   baseUrl: '/docu-test/',
@@ -37,7 +37,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/netfunnel_card.png', // ← SNS 공유용 이미지
+    image: 'img/netfunnel_card.png',
     navbar: {
       title: 'NetFUNNEL Developer',
       logo: {
@@ -83,7 +83,7 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} STCLab Inc. All rights reserved.`,
     },
     prism: {
-      additionalLanguages: ['groovy', 'kotlin'],
+      additionalLanguages: ['groovy', 'kotlin', 'java'],
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },

@@ -38,10 +38,10 @@
 
 .featureImage {
   width: 100%;
-  max-width: 300px; /* 원하는 고정 너비 */
-  height: 200px;     /* 고정 높이 */
-  object-fit: cover; /* 비율 유지하며 채우기 */
-  border-radius: 12px; /* optional: 둥근 테두리 */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* optional: 그림자 */
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
 }
