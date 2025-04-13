@@ -179,28 +179,28 @@ NetFUNNEL 서버와 통신하기 위해 인터넷 사용 권한을 추가해야 
 
 <Tabs>
   <TabItem value="AndroidManifest.xml" label="AndroidManifest.xml">
-    ```xml
-android {
-    compileSdk 34
-    
-    defaultConfig {
-        minSdk 22
-        targetSdk 34
+    ```groovy
+    android {
+        compileSdk 34
+        
+        defaultConfig {
+            minSdk 22
+            targetSdk 34
+        }
+        
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+        
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+        
+        buildFeatures {
+            viewBinding = true
+        }
     }
-    
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    
-    buildFeatures {
-        viewBinding = true
-    }
-}
     ```
   </TabItem>
 </Tabs>
