@@ -1,0 +1,51 @@
+{
+    "stc": {
+      "agent_type": "cdn_cloudflare",
+      "agent_version": "1.0.0"
+    },
+    "client": {
+      "id": "client-1234"
+    },
+    "user": {
+      "os": {
+        "name": "Android",
+        "version": "12.0"
+      },
+      "browser": {
+        "name": "Chrome",
+        "version": "111.0.0",
+        "brand": "Google Chrome"
+      },
+      "ip": "203.0.113.45"
+    },
+    "device": {
+      "type": "mobile",
+      "model": "SM-A505F",
+      "brand": "Samsung",
+      "name": "Galaxy A50"
+    },
+    "event": {
+      "date": 1712286000,
+      "id": "3f8c9e10-3ad2-4a8a-a4d9-2e5a4f7123ba"
+    },
+    "request": {
+      "url": "https://www.example.com/main.js?user=abc&age=100",
+      "scheme": "HTTPS",
+      "type": "Beacon",
+      "method": "POST",
+      "resource": {
+        "extension": "js",
+        "type": "script",
+        "script": "main.js"
+      }
+    },
+    "response": {
+      "status_code": 200,
+      "size": 8432,
+      "mime_type": "application/javascript",
+      "encoding": "gzip",
+      "duration": 102,
+      "cache_status": "HIT",
+      "redirected": false
+    }
+}

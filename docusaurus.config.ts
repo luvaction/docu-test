@@ -8,10 +8,10 @@ const config: Config = {
   favicon: 'img/logo_STCLab.png',
 
   url: 'https://luvaction.github.io',
-  baseUrl: '/docu-test/',
+  baseUrl: '/',
 
   organizationName: 'luvaction',
-  projectName: 'docu-test',
+  projectName: 'xuide',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
